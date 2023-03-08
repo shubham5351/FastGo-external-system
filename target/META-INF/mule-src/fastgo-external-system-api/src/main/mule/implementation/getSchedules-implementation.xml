@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="getSchedules-implementationSub_Flow" doc:id="c0e87d26-b437-4701-85d9-58267c1251c3" >
+		<db:select doc:name="Select Schedules for FastGo System" doc:id="848fb29d-e413-4529-98b6-3658a5721403" config-ref="Database_Config">
+			<db:sql ><![CDATA[SELECT * FROM TravelOnTipSchedules WHERE companyName="fastgo"]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform DB Response Message to JSON" doc:id="951e10d3-28e6-4c2b-b6db-cead664b30f0" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+</mule>
