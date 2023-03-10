@@ -1,7 +1,7 @@
 http:
   listener:
     host: "localhost"
-    port: "9081"
+    port: "9082"
     path: "/fastGoCall/{serviceType}/"
 db:
   mysql:
